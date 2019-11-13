@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
-const { prefix, token, mongoURI } = require("../config/config");
+const mongoose = require("mongoose");
+const { prefix, token, mongoURI } = require("./config/config");
 const commands = require("./services/commands");
 const client = new Discord.Client({ disabledEvents: ["TYPING_START"] });
 
@@ -10,7 +11,7 @@ client.once("ready", () => {
 });
 
 // Connect to MongoDB Atlas
-mongoose.connect(mongoURI, { useNewUrlParser: true, useCreateIndex: true }).then(
+mongoose.connect(mongoURI, { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }).then(
   () => {
     console.log("MongoDB connected...\n");
   },

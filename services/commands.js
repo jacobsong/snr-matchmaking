@@ -22,7 +22,7 @@ const register = async (msg) => {
   const embed = new Discord.RichEmbed();
 
   try {
-    const existingPlayer = await Player.find({ discordId: playerId }).limit(1);
+    const existingPlayer = await Player.find({ discordId: msg.author.id }).limit(1);
 
     if (existingPlayer.length) {
       embed.setColor("GREEN");
@@ -38,7 +38,7 @@ const register = async (msg) => {
     }).save();
 
     embed.setColor("GREEN");
-    embed.setDescription(`**Success**, registered ${playerName}`);
+    embed.setDescription(`**Success**, registered ${msg.author.username}`);
     msg.channel.send(embed);
 
   } catch {
