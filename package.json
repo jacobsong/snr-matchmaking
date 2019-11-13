@@ -1,0 +1,16 @@
+{
+  "name": "snr-matchmaking",
+  "version": "1.0.0",
+  "description": "Matchmaking bot for the SnR Discord",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js",
+    "dev": "nodemon main.js"
+  },
+  "author": "Jake",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^11.5.1",
+    "mongoose": "^5.7.10"
+  }
+}
