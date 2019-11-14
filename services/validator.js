@@ -1,9 +1,26 @@
 const Discord = require("discord.js");
 const validMember = "Villains";
 const validMod = "Super Villians";
+const { prefix } = require("../config/config");
 
-const isCommand = (msg) => {
+const checkArgs = (msg, command, args) => {
+  if (command.guildOnly && msg.channel.type !== 'text') {
+    msg.reply('I can\'t execute that command inside DMs!');
 
+    return "failed";
+  }
+
+  if (command.args && !args.length) {
+    let reply = `You didn't provide any arguments, ${msg.author}!`;
+    if (command.argsList) {
+      reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.argsList}\``;
+    }
+    msg.channel.send(reply);
+
+    return "failed";
+  }
+
+  return "success";
 };
 
 const checkMember = (member) => {
@@ -43,7 +60,7 @@ const checkAdmin = (msg) => {
 };
 
 module.exports = {
-  isCommand,
+  checkArgs,
   checkMember,
   checkMod,
   checkAdmin
